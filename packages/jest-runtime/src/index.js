@@ -399,8 +399,7 @@ class Runtime {
       localModule.loaded = true;
     } else {
       // Look for a real module to generate an automock from
-      this._mockRegistry[moduleID] = this._generateMock(from, "");
-      // OG: this._mockRegistry[moduleID] = this._generateMock(from, manualMock);
+      this._mockRegistry[moduleID] = this._generateMock(from, manualMock);
       // this._mockRegistry[moduleID] = this._generateMock(from, modulePath);
     }
 
