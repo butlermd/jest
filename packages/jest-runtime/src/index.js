@@ -383,6 +383,9 @@ class Runtime {
       manualMock = true;
       modulePath = potentialManualMock;
     }
+    else {
+      manualMock = false;
+    }
 
     if (manualMock) {
       const localModule: Module = {
