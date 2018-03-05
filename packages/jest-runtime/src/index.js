@@ -382,6 +382,8 @@ class Runtime {
     if (fs.existsSync(potentialManualMock)) {
       manualMock = true;
       modulePath = potentialManualMock;
+    } else {
+      // manualMock = false;
     }
 
     if (manualMock) {
@@ -397,7 +399,9 @@ class Runtime {
       localModule.loaded = true;
     } else {
       // Look for a real module to generate an automock from
-      this._mockRegistry[moduleID] = this._generateMock(from, moduleName);
+      this._mockRegistry[moduleID] = this._generateMock(from, "");
+      // OG: this._mockRegistry[moduleID] = this._generateMock(from, manualMock);
+      // this._mockRegistry[moduleID] = this._generateMock(from, modulePath);
     }
 
     return this._mockRegistry[moduleID];

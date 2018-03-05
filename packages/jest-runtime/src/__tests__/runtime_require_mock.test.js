@@ -13,6 +13,10 @@ const path = require('path');
 let createRuntime;
 const consoleWarn = console.warn;
 
+const moduleNameMapper = {
+  mappedToModule: '<rootDir>/TestModuleNameMapperResolution',
+};
+
 describe('Runtime', () => {
   beforeEach(() => {
     createRuntime = require('createRuntime');
@@ -61,6 +65,15 @@ describe('Runtime', () => {
           'RegularModule',
         );
         expect(exports.getModuleStateValue._isMockFunction).toBe(true);
+      }));
+
+    it('automocks moduleNameMapper modules without a manual mock', () =>
+      createRuntime(__filename, {moduleNameMapper}).then(runtime => {
+        const exports = runtime.requireMock(
+          runtime.__mockRootPath,
+          'mappedToModule',
+        );
+        expect(exports.moduleNameMapperResolutionWorks).toBeUndefined();
       }));
 
     it('automocks relative-path modules without a file extension', () =>
